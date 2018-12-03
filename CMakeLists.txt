@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(nuvation_nuv300_bms_driver)
+project(nuv_bms_driver)
 
 # add_compile_options(-std=c++11)
 
@@ -25,8 +25,8 @@ find_package(Modbus)
 ## catkin specific configuration ##
 ###################################
 catkin_package(
-#	INCLUDE_DIRS ros/include
-#	LIBRARIES nuvation_nuv300_bms_driver
+	INCLUDE_DIRS include
+	LIBRARIES nuv_300_bms
 	CATKIN_DEPENDS
 		${catkin_RUN_PACKAGES}
 	DEPENDS
@@ -38,12 +38,18 @@ catkin_package(
 ###########
 
 include_directories(
-	#ros/include
+	include
 	${catkin_INCLUDE_DIRS}
 	${MODBUS_INCLUDE_DIRS}
 )
 
-add_executable(nuvation_nuv300_bms_driver_node ros/src/nuvation_nuv300_bms_driver_node.cpp)
+add_library(nuv_300_bms src/nuv_300_bms.cpp)
+target_link_libraries(nuv_300_bms
+	${catkin_LIBRARIES}
+	${MODBUS_LIBRARIES}
+)
+
+add_executable(nuvation_nuv300_bms_driver_node src/nuvation_nuv300_bms_driver_node.cpp)
 add_dependencies(nuvation_nuv300_bms_driver_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(nuvation_nuv300_bms_driver_node
 	${catkin_LIBRARIES}
@@ -53,17 +59,17 @@ target_link_libraries(nuvation_nuv300_bms_driver_node
 #############
 ## Install ##
 #############
-install(TARGETS nuvation_nuv300_bms_driver_node
+install(TARGETS nuvation_nuv300_bms_driver_node nuv_300_bms
 	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-#install(DIRECTORY ros/include/${PROJECT_NAME}/
-#	DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#	FILES_MATCHING PATTERN "*.h"
-#)
+install(DIRECTORY include/${PROJECT_NAME}/
+	DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+	FILES_MATCHING PATTERN "*.h"
+)
 
-install(DIRECTORY ros/launch
-	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/ros
+install(DIRECTORY launch
+	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

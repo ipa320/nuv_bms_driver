@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-	<name>nuvation_nuv300_bms_driver</name>
+	<name>nuv_bms_driver</name>
 	<version>0.6.12</version>
 	<description>Driver for reading battery management system status values from the Nuvation Energy NUV 300 BMS</description>
 
@@ -9,7 +9,7 @@
 	
 	<license>Apache 2.0</license>
 
-	<!-- <url type="website">http://wiki.ros.org/nuvation_nuv300_bms_driver</url> -->
+	<!-- <url type="website">http://wiki.ros.org/nuv_bms_driver</url> -->
 
 	<buildtool_depend>catkin</buildtool_depend>
 
