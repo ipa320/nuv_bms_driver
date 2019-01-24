@@ -2,7 +2,7 @@
 This driver allows to read current and voltage measurements and maybe even state of charge measurements from the Nuvation NUV300 battery management system
 
 
-## Bugfix for estimating SoC without measuring cell voltages
+## ToDo: Bugfix for estimating SoC without measuring cell voltages
 
 ### Part A
 This use-case of no individual cells connected to the BMS is unique and we are exploring new ways to use the SoC feature. It was not designed to work in this use-case, but it is an interesting opportunity to try to push it to the limits.
